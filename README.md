@@ -4,6 +4,7 @@
 ## Neptune(Graph database service)
 - Using 3 types of query language: Gremlin, OpenCypher, SPARQL
   - Gremlin: for creating and querying property graphs. traversal query language
+  - Import using csv
 ```
 // Creating graph traversal
   g := gremlingo.Traversal_().WithRemote(driverRemoteConnection)
@@ -13,11 +14,13 @@
 ```
   - OpenCypher: Inspired by SQL, that specifies a pattern of nodes and relationships to find in your graph using a motif syntax (like ()-[]->()). An openCypher query often starts with a MATCH clause, followed by other clauses such as WHERE, WITH, and RETURN.
   Gremlin and openCypher are both property-graph query languages, and they are complementary in many ways.
+  - Import using csv
 ```
 MATCH (n:airport) RETURN n //Find all node with label
 ```  
   - SPARQL: query language for the Resource Description Framework (RDF), which is a graph data format designed for the web. Amazon Neptune is compatible with SPARQL 1.1
     - `String queryString = "SELECT ?s ?p ?o WHERE { ?s ?p ?o } limit 10";`
+    - Import using RDF file(ntriples, nquads, rdfxml, turtle) and must use UTF-8 format
 
 ## Redshift Spectrum
 - Just like Athena that can query directly from S3, but a cluster must be provisioned to ensure performance while Athena is rely on AWS free resources.
@@ -38,3 +41,11 @@ MATCH (n:airport) RETURN n //Find all node with label
 - RDS Aurora MySQL does not support MyISAM storage engine
 - Point in Time Recovery and Automated Backup feature only supported on InnoDB(MySQL) or XtraDB(MariaDB) storage engine
 - Oracle Data Guard Switchover operation is available . You will need an Oracle Database Enterprise Edition (EE) license to use replicas in mounted mode, and an additional Oracle Active Data Guard license to use replicas in read-only mode
+
+### QLDB
+- Amazon Quantum Ledger Database (Amazon QLDB) is a fully managed ledger database that provides a transparent, immutable, and cryptographically verifiable transaction log.
+- Serverless
+- Data only can be appended, can not be edited or deleted
+
+### Other
+- Trusted Advisor is automatically refresh report once a week in Business and Enterpricse Support Plan only
