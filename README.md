@@ -40,8 +40,18 @@ MATCH (n:airport) RETURN n //Find all node with label
 - To make a native backup of RDS Microsoft SQL Server (.bak file), we need `SQLSERVER_BACKUP_RESTORE` option added to an option group on your DB instance.
 - RDS Aurora MySQL does not support MyISAM storage engine
 - Point in Time Recovery and Automated Backup feature only supported on InnoDB(MySQL) or XtraDB(MariaDB) storage engine
-- Oracle Data Guard Switchover operation is available . You will need an Oracle Database Enterprise Edition (EE) license to use replicas in mounted mode, and an additional Oracle Active Data Guard license to use replicas in read-only mode
+- Oracle Data Guard Switchover operation is available on RDS. You will need an Oracle Database Enterprise Edition (EE) license to use replicas in mounted mode, and an additional Oracle Active Data Guard license to use replicas in read-only mode
 
+### DMS
+- To determine the best target direction for your overall environment, create a multiserver assessment report.
+- ORA-01555 during extracting data from the source
+  - Reduce the extract query runtime by optimizing the query in the source DB.
+    - Optimze the query in the source DB
+  - Make sure the source is retaining the old image of data longer than the extract query runtime.
+    - Increase undo retention size in the source DB
+  - Using a lager replication instance if the cause of slow extract is limited I/O from a replication instance.
+  - Consider source-filter options and depending on the size of the table, you can run the tasks using different filters from different replication instances. This distributes the loading with more computational power, making extract faster.
+  - Create an active data guard (read-only physical standby) and take it out of replication. Perfom data extraction on the new standby, take note of the starting timestamp so it can later be used to start the change data capture (CDC) from primary database.
 ### QLDB
 - Amazon Quantum Ledger Database (Amazon QLDB) is a fully managed ledger database that provides a transparent, immutable, and cryptographically verifiable transaction log.
 - Serverless
