@@ -21,11 +21,20 @@ MATCH (n:airport) RETURN n //Find all node with label
   - SPARQL: query language for the Resource Description Framework (RDF), which is a graph data format designed for the web. Amazon Neptune is compatible with SPARQL 1.1
     - `String queryString = "SELECT ?s ?p ?o WHERE { ?s ?p ?o } limit 10";`
     - Import using RDF file(ntriples, nquads, rdfxml, turtle) and must use UTF-8 format
+- The Neptune cluster must be restarted after enabling audit logs.
 
+## Redshift
+- Amazon Redshift performs its own audit logging. These logs store information about connections and user activities in your database. The logs are stored in Amazon S3 buckets. 
+  - Connection log – Logs authentication attempts as well as connections and disconnections
+  - User log – Logs information about changes to database user definitions
+  - User activity log – Logs each query before it is run on the database
+- When you enable Amazon Redshift Enhanced VPC Routing, all COPY and UNLOAD traffic between the cluster and your data repositories are routed through the VPC and not over the internet.
+  - VPC Gateway for S3 bucket in the same region
+  - NAT Gateway is require if S3 bucket in different region
 ## Redshift Spectrum
 - Just like Athena that can query directly from S3, but a cluster must be provisioned to ensure performance while Athena is rely on AWS free resources.
 
-### Dynamo DB
+## Dynamo DB
 - Point In Time Recovery is able to restore data accross regions
 - Amazon Kinesis Data Firehose can convert the format of your input data from JSON to Apache Parquet or Apache ORC before storing the data in Amazon S3
 - Provisioned mode:
@@ -39,14 +48,17 @@ MATCH (n:airport) RETURN n //Find all node with label
   - Using DynamoDB Streams and Lambda to archive TTL deleted items in realtime (DynamoDB -> Stream -> Lambda -> S3)
 - Dynamo DB Change Data Capture support Kinesis DataStreams and AWS Glue
 - Streaming options for change data capture: Kinesis (High performance(parrarell), with up to 1 year of data retention) or the default DynamoDB Stream(data retention is 24h)
-
-### RDS 
+- Programmatic interfaces in DynamoDB SDK
+  - Low-level interface(item level)
+  - Document interfaces(table and index level)
+  - Object persistence interface
+## RDS 
 - To make a native backup of RDS Microsoft SQL Server (.bak file), we need `SQLSERVER_BACKUP_RESTORE` option added to an option group on your DB instance.
 - RDS Aurora MySQL does not support MyISAM storage engine
 - Point in Time Recovery and Automated Backup feature only supported on InnoDB(MySQL) or XtraDB(MariaDB) storage engine
 - Oracle Data Guard Switchover operation is available on RDS. You will need an Oracle Database Enterprise Edition (EE) license to use replicas in mounted mode, and an additional Oracle Active Data Guard license to use replicas in read-only mode
 
-### DMS
+## DMS
 - To determine the best target direction for your overall environment, create a multiserver assessment report.
 - ORA-01555 during extracting data from the source
   - Reduce the extract query runtime by optimizing the query in the source DB.
@@ -75,10 +87,13 @@ MATCH (n:airport) RETURN n //Find all node with label
   - AWS DMS doesn't support validating the Oracle LONG type.
   - AWS DMS doesn't support validating the Oracle Spatial type during heterogeneous migration. 
 
-### QLDB
+## QLDB
 - Amazon Quantum Ledger Database (Amazon QLDB) is a fully managed ledger database that provides a transparent, immutable, and cryptographically verifiable transaction log.
 - Serverless
 - Data only can be appended, can not be edited or deleted
 
-### Other
+## Other
 - Trusted Advisor is automatically refresh report once a week in Business and Enterpricse Support Plan only
+- Database services like DynamoDB and Amazon QLDB do not run within a VPC. VPC endpoints can alleviate these challenges. A VPC endpoint enables Amazon EC2 instances in your VPC to use their private IP addresses to access the database with no exposure to the public internet.
+  - Amazon QLDB uses interface endpoints. An interface endpoint is an elastic network interface with a private IP address from the IP address range of your subnet that serves as an entry point for traffic destined to a supported service.
+  - DynamoDB uses gateway endpoints. A gateway endpoint is a gateway that you specify as a target for a route in your route table for traffic destined to a supported AWS service.
