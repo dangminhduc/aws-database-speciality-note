@@ -35,6 +35,10 @@ MATCH (n:airport) RETURN n //Find all node with label
 - TransactGetItems is a synchronous read operation that groups up to 100 Get actions together. These actions can target up to 100 distinct items in one or more DynamoDB tables within the same AWS account and Region. The aggregate size of the items in the transaction can't exceed 4 MB. 
 - Query operation is require partition key name and value specified. Scan operation will read all items in a table.
 - Works with Gateway Endpoint service same as S3. Other service(such as SSM are using normal Private Link)
+- Using Dynamo Streams to process data in real-time
+  - Using DynamoDB Streams and Lambda to archive TTL deleted items in realtime (DynamoDB -> Stream -> Lambda -> S3)
+- Dynamo DB Change Data Capture support Kinesis DataStreams and AWS Glue
+- Streaming options for change data capture: Kinesis (High performance(parrarell), with up to 1 year of data retention) or the default DynamoDB Stream(data retention is 24h)
 
 ### RDS 
 - To make a native backup of RDS Microsoft SQL Server (.bak file), we need `SQLSERVER_BACKUP_RESTORE` option added to an option group on your DB instance.
