@@ -35,6 +35,12 @@ MATCH (n:airport) RETURN n //Find all node with label
 - Just like Athena that can query directly from S3, but a cluster must be provisioned to ensure performance while Athena is rely on AWS free resources.
 
 ## Dynamo DB
+- Limitations:
+  - Max item size is 400KB
+  - You can create up to 20 global secondary indexes (default quota) and up to 5 local secondary indexes per table. 
+  - Local secondary indexes are created at the same time that you create a table. You cannot add a local secondary index to an existing table, nor can you delete any local secondary indexes that currently exist.
+  - Queries on global secondary indexes support eventual consistency only.
+  - With global secondary index queries or scans, you can only request the attributes that are projected into the index. DynamoDB does not fetch any attributes from the table.
 - Point In Time Recovery is able to restore data accross regions
 - Amazon Kinesis Data Firehose can convert the format of your input data from JSON to Apache Parquet or Apache ORC before storing the data in Amazon S3
 - Provisioned mode:
