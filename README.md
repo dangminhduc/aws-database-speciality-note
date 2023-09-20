@@ -77,6 +77,9 @@ MATCH (n:airport) RETURN n //Find all node with label
 - You can call the native functions lambda_sync and lambda_async when you use Aurora MySQL to invoke a Lambda Function from Aurora. Lambda function can be invoke from a stored procedure or trigger.
 - SQL Server Reporting Services is enabled via option group
 
+## ElastiCache
+- Redis with cluster mode enabled can have maximmum of 90 nodes. Each shard can consist on primary node and up to 5 replicas -> maximum shard is 15
+
 ## DMS
 - To determine the best target direction for your overall environment, create a multiserver assessment report.
 - ORA-01555 during extracting data from the source
