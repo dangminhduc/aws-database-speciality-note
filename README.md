@@ -74,6 +74,8 @@ MATCH (n:airport) RETURN n //Find all node with label
 - Oracle Data Guard Switchover operation is available on RDS. You will need an Oracle Database Enterprise Edition (EE) license to use replicas in mounted mode, and an additional Oracle Active Data Guard license to use replicas in read-only mode
 - You can require that connections to your Aurora PostgreSQL DB cluster use SSL/TLS by using the rds.force_ssl parameter
 - XML file can be loaded directly from S3
+- You can call the native functions lambda_sync and lambda_async when you use Aurora MySQL to invoke a Lambda Function from Aurora. Lambda function can be invoke from a stored procedure or trigger.
+- SQL Server Reporting Services is enabled via option group
 
 ## DMS
 - To determine the best target direction for your overall environment, create a multiserver assessment report.
