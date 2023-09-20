@@ -23,6 +23,12 @@ MATCH (n:airport) RETURN n //Find all node with label
     - Import using RDF file(ntriples, nquads, rdfxml, turtle) and must use UTF-8 format
 - The Neptune cluster must be restarted after enabling audit logs.
 
+## DocumentDB
+- You can use the profiler in Amazon DocumentDB (with MongoDB compatibility) to log the execution time and details of operations that were performed on your cluster.
+  - Enable by enabling custom parameter store
+- Extract query plan by using explain command
+- To find long running queries that slow down due to a suboptimal query plan, or queries that are blocked due to resource contention, use the `currentOp` command
+
 ## Redshift
 - Amazon Redshift performs its own audit logging. These logs store information about connections and user activities in your database. The logs are stored in Amazon S3 buckets. 
   - Connection log – Logs authentication attempts as well as connections and disconnections
@@ -31,6 +37,7 @@ MATCH (n:airport) RETURN n //Find all node with label
 - When you enable Amazon Redshift Enhanced VPC Routing, all COPY and UNLOAD traffic between the cluster and your data repositories are routed through the VPC and not over the internet.
   - VPC Gateway for S3 bucket in the same region
   - NAT Gateway is require if S3 bucket in different region
+
 ## Redshift Spectrum
 - Just like Athena that can query directly from S3, but a cluster must be provisioned to ensure performance while Athena is rely on AWS free resources.
 
@@ -58,11 +65,15 @@ MATCH (n:airport) RETURN n //Find all node with label
   - Low-level interface(item level)
   - Document interfaces(table and index level)
   - Object persistence interface
+- Amazon DynamoDB integrates with Amazon CloudWatch Contributor Insights to provide information about the most accessed and throttled items in a table or global secondary index.
+ 
 ## RDS 
 - To make a native backup of RDS Microsoft SQL Server (.bak file), we need `SQLSERVER_BACKUP_RESTORE` option added to an option group on your DB instance.
 - RDS Aurora MySQL does not support MyISAM storage engine
 - Point in Time Recovery and Automated Backup feature only supported on InnoDB(MySQL) or XtraDB(MariaDB) storage engine
 - Oracle Data Guard Switchover operation is available on RDS. You will need an Oracle Database Enterprise Edition (EE) license to use replicas in mounted mode, and an additional Oracle Active Data Guard license to use replicas in read-only mode
+- You can require that connections to your Aurora PostgreSQL DB cluster use SSL/TLS by using the rds.force_ssl parameter
+- XML file can be loaded directly from S3
 
 ## DMS
 - To determine the best target direction for your overall environment, create a multiserver assessment report.
@@ -92,6 +103,7 @@ MATCH (n:airport) RETURN n //Find all node with label
   - AWS DMS doesn't support data validation when character substitution task settings are used.
   - AWS DMS doesn't support validating the Oracle LONG type.
   - AWS DMS doesn't support validating the Oracle Spatial type during heterogeneous migration. 
+- DMS does not create indexes on the target DB
 
 ## QLDB
 - Amazon Quantum Ledger Database (Amazon QLDB) is a fully managed ledger database that provides a transparent, immutable, and cryptographically verifiable transaction log.
