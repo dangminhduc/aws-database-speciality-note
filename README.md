@@ -66,6 +66,7 @@ MATCH (n:airport) RETURN n //Find all node with label
   - Document interfaces(table and index level)
   - Object persistence interface
 - Amazon DynamoDB integrates with Amazon CloudWatch Contributor Insights to provide information about the most accessed and throttled items in a table or global secondary index.
+- Projection expression = `select {collumn}`; Filter expression = `where`
  
 ## RDS 
 - To make a native backup of RDS Microsoft SQL Server (.bak file), we need `SQLSERVER_BACKUP_RESTORE` option added to an option group on your DB instance.
