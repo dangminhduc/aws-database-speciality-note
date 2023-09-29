@@ -1,5 +1,3 @@
-# aws-solution-architect-note
-
 # Database Specialist note
 ## Neptune(Graph database service)
 - Using 3 types of query language: Gremlin, OpenCypher, SPARQL
